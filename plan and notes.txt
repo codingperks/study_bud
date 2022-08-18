@@ -1,0 +1,25 @@
+Tools to aid with studying
+
+Key components:
+    1. Goal setting, diary pages
+    2. Pomodoro timers (25 minutes + short and long breaks, pomodoro counter)
+    3. Water reminder
+
+Other components (potential):
+    1. Git (using)
+    2. Sounds and related functionality
+    3. GUI (?)
+
+### Components (detail)
+
+Goal setting, diaries
+    1. Allow for the setting of 'session' goals, writing down at start of a session what you intend to accomplish.
+        a. Saving these notes in a database
+        b. Allow for long-term goal tracking
+    2. Pomodoro timers
+        a. Functionality for timers, both for a 25 minute pomodoro session, as well as for long and short breaks
+        b. Play sounds when timers start/finish
+    3. Water reminder
+        a. Set an interval to be reminded to drink water at
+        b. Pop-up, or message which needs to be confirmed
+        c. Intrusive with sound, or unintrusive but potentially missed (tbd, or option)?
