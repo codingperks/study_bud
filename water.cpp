@@ -55,14 +55,3 @@ void water() { // Main for calling in main.cpp
         }
     }
 }
-
-/*
-int main() // Main for testing - integrate into main.cpp
-{
-    std::thread th(water);
-
-    // water();
-
-    th.join();
-    return 0;
-}*/
