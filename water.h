@@ -5,5 +5,5 @@
 #ifndef STUDY_BUD_WATER_H
 #define STUDY_BUD_WATER_H
 
-
+void water();
 #endif //STUDY_BUD_WATER_H

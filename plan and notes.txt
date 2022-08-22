@@ -23,3 +23,6 @@ Goal setting, diaries
         a. Set an interval to be reminded to drink water at
         b. Pop-up, or message which needs to be confirmed
         c. Intrusive with sound, or unintrusive but potentially missed (tbd, or option)?
+        to do:
+            - Confirm message to restart timer or finish timer
+            - Add sound (mcisendsound?)
