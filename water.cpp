@@ -4,7 +4,6 @@
 
 /* Functionality to/do
  * Create a sound once timer is finished
- * Start timer again once message acknowledged
  * */
 
 #include "requirements.h"
@@ -20,7 +19,7 @@ int userEntry(){ // Function to take user entry
 
 void waterTimer(int minutes){ // water_timer functionality
    int user_seconds {};
-   user_seconds = (minutes); // convert minutes to seconds don't forget to add
+   user_seconds = (minutes); // convert minutes to seconds
 
    std::cout << "Timer started for " << minutes << " minute(s).\n";
 
@@ -38,15 +37,11 @@ std::string confirmWarning(){
 
 void water() { // Main for calling in main.cpp
     while (true) {
-        // User enters in minutes timer interval
-        int minutes{userEntry()};
-        // Timer uses minutes to operate timer
-        waterTimer(minutes);
-        // play sound - to implement
-        // confirm / deny
         std::string confirm {confirmWarning()};
         if (confirm == "Y" | confirm == "y") // confirmation clause - user confirm to restart timer or not
         {
+            int minutes{userEntry()};
+            waterTimer(minutes);
             continue;
         }
         else

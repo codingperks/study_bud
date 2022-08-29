@@ -19,7 +19,7 @@ Goal setting, diaries
     2. Pomodoro timers
         a. Functionality for timers, both for a 25 minute pomodoro session, as well as for long and short breaks
         b. Play sounds when timers start/finish
-    3. Water reminder
+    3. Water reminder - integrate into 2 due to complications of multi-threading implementation
         a. Set an interval to be reminded to drink water at - finished
         b. Pop-up, or message which needs to be confirmed - finished
         c. Intrusive with sound, or unintrusive but potentially missed (tbd, or option)?
