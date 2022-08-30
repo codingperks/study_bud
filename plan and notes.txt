@@ -17,7 +17,7 @@ Goal setting, diaries
         a. Saving these notes in a database
         b. Allow for long-term goal tracking
     2. Pomodoro timers
-        a. Functionality for timers, both for a 25 minute pomodoro session, as well as for long and short breaks
+        a. Functionality for timers, both for a 25 minute pomodoro session, as well as for long and short breaks - done
         b. Play sounds when timers start/finish
     3. Water reminder - integrate into 2 due to complications of multi-threading implementation
         a. Set an interval to be reminded to drink water at - finished
@@ -26,3 +26,9 @@ Goal setting, diaries
         to do:
             - Confirm message to restart timer or finish timer - added
             - Add sound (mcisendsound?)
+
+To do (30/08):
+    1. convert seconds of timers into minutes and seconds
+    2. investigate playing of sounds
+    3. Export diaries to database (csv with dates)
+    4. add diary input date and diary complete date

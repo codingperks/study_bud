@@ -3,4 +3,4 @@ project(study_bud)
 
 set(CMAKE_CXX_STANDARD 23)
 
-add_executable(study_bud main.cpp water.cpp water.h requirements.h diary.cpp pomodoro.cpp diary.h)
+add_executable(study_bud main.cpp water.cpp water.h requirements.h diary.cpp pomodoro.cpp diary.h pomodoro.h)
