@@ -11,6 +11,6 @@
 #include <chrono>
 #include <thread>
 #include <utility>
-
+#include <string>
 
 #endif //STUDY_BUD_REQUIREMENTS_H

@@ -25,7 +25,7 @@ void Diary::displayDiary(){  // prints the current diary goals
 std::string Diary::enterGoal(){ // allows user entry of goals
     std::cout << "Enter a goal: ";
     std::string goal {};
-    std::getline(std::cin, goal);
+    std::getline(std::cin >> std::ws, goal);
 
     return goal;
 }
@@ -38,22 +38,26 @@ void Diary::addGoal (const std::string& goal){ // adds user entered goals
 void Diary::editGoal(){ // allows user to edit diary entries
     // Diary entry selection
     Diary::displayDiary();
-    std::cout << "Please type the index of goal you'd like to edit: ";
 
     while (true) {
+        if ((m_diary.empty())) {
+            break;
+        }
         int n_goal{};
+        std::cout << "Please type the index of goal you'd like to edit: ";
         std::cin >> n_goal;
         n_goal = n_goal - 1; // subtract for index searching
 
         if (n_goal >= m_diary.size()) { // error catching
-            std::cout << "Incorrect entry\nPlease type the index of goal you'd like to edit: ";
+            std::cout << "Incorrect entry\n";
+            n_goal = 0;
         }
 
         // Diary update
         else {
-            std::string edited_goal{};
+            std::string edited_goal {};
             std::cout << "Type update here: ";
-            std::cin >> edited_goal;
+            std::getline(std::cin >> std::ws, edited_goal);
             m_diary[n_goal] = edited_goal;
             break;
         }

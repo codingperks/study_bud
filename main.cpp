@@ -19,7 +19,7 @@ int main() {
             switch (option) {
                 case 1: { // Diary menu
                     int diary_option{};
-                    do {
+                    while(diary_option != 5) {
                         std::cout << "Diary\n" << "Please select an option:\n"
                                   << "[1] View diary\n"
                                   << "[2] Enter goal\n"
@@ -27,6 +27,7 @@ int main() {
                                   << "[4] Delete goal\n"
                                   << "[5] Exit\n";
 
+                        diary_option = {};
                         std::cin >> diary_option;
                         std::cin.clear(); // to remove erroneous enter presses from cin
                         std::cin.get();
@@ -49,7 +50,8 @@ int main() {
                             default:
                                 break;
                         }
-                    } while (diary_option != 5);
+                    }
+                    std::cin.clear();
                     break;
                 }
                 case 2: // Timer menu

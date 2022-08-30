@@ -53,7 +53,7 @@ int Pomodoro::pomodoroCounter(int timerCounter){ // increment and return counter
 }
 
 void Pomodoro::pomodoroCounterReset(int timerCounter){
-    timerCounter = 0;
+     timerCounter = 0;
 }
 
 void Pomodoro::longBreakTarget(){
