@@ -1,22 +1,19 @@
-#include <iostream>
 #include "requirements.h"
 #include "water.h"
 #include "diary.h"
 
 int main() {
     while (true) {
-
-
         // Options menu
         int option{};
         do {
-            std::cout << "Welcome to the study bud!\n" << "Please select an option:\n"
+            std::cout << "\nWelcome to the study bud!\n" << "Please select an option:\n"
                       << "[1] Diary\n" << "[2] Timer\n" << "[3] Exit\n";
             std::cin >> option;
             std::cin.clear(); // to remove erroneous enter presses from cin
             std::cin.get();
 
-            switch (option) {
+            switch (option) { // Diary menu
                 case 1:
                     int diary_option{};
                     do {
@@ -35,7 +32,7 @@ int main() {
                                 diary.displayDiary();
                                 break;
                             case 2:
-                                diary.addGoal({diary.enterGoal()});
+                                diary.addGoal({Diary::enterGoal()});
                                 break;
                             case 3:
                                 diary.editGoal();
@@ -48,7 +45,7 @@ int main() {
                         }
                     } while (diary_option < 5);
             }
-        } while (option < 3);
+        } while (option != 3);
         return 0;
     }
 }
