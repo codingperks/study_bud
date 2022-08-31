@@ -28,8 +28,9 @@ Goal setting, diaries
             - Add sound (mcisendsound?)
 
 To do (30/08):
-    a. error handling and exceptions
-    1. convert seconds of timers into minutes and seconds
+    a. error handling and exceptions - added
+    1. convert seconds of timers into minutes and seconds - added
+    1b. pause and play for timers - potential feature
     2. investigate playing of sounds
     3. Export diaries to database (csv with dates)
     4. add diary input date and diary complete date
