@@ -1,5 +1,4 @@
 #include "requirements.h"
-#include "water.h"
 #include "diary.h"
 #include "pomodoro.h"
 
@@ -118,11 +117,14 @@ int main() {
                             case 3: // Changing pomodoro settings
                                 pomodoro.pomodoroSettings();
                                 break;
+                                break;
                             case 4: // Resetting pomodoro counter
-                                std::cout << "You have reset your counter of " << timerCounter << " to zero.\n";
+                                std::cout << "You have reset your counter of " << timerCounter << " to 0.\n";
                                 pomodoro.pomodoroCounterReset(timerCounter);
+                                break;
                             case 5: // Setting pomodoro target for long breaks
                                 pomodoro.longBreakTarget();
+                                break;
                             case 6:
                             default:
                                 break;

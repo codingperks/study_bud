@@ -16,9 +16,16 @@ void Pomodoro::pomodoroTimer() const{ // count down a pomodoro timer - pause and
 
     while (user_seconds >= 1) // visual indication of timer remaining
     {
-        std::cout << "\rPomodoro time remaining: " << int(display_minutes%60) << ':' << int(user_seconds%60)
-                                                   << std::flush;
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        if (int(user_seconds%60 == 0)){ // formatting to display 00 instead of 0
+            std::cout << "\rPomodoro time remaining: " << int(display_minutes%60) << ':' << "00"
+                      << std::flush;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
+        else {
+            std::cout << "\rPomodoro time remaining: " << int(display_minutes % 60) << ':' << int(user_seconds % 60)
+                      << std::flush;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
         user_seconds--;
         display_minutes = (user_seconds / 60);
     }
@@ -36,9 +43,17 @@ void Pomodoro::shortBreakTimer() const{
 
     while (user_seconds >= 1) // visual indication of timer remaining
     {
-        std::cout << "\rShort break time remaining: " << int(display_minutes%60) << ':' << int(user_seconds%60)
-                                                      << std::flush;
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        if (int(user_seconds%60 == 0)){ // formatting to display 00 instead of 0
+            std::cout << "\rShort break time remaining: " << int(display_minutes%60) << ':' << "00"
+                      << std::flush;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
+
+        else {
+            std::cout << "\rShort break time remaining: " << int(display_minutes % 60) << ':' << int(user_seconds % 60)
+                      << std::flush;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
         user_seconds--;
         display_minutes = (user_seconds / 60);
     }
@@ -56,9 +71,17 @@ void Pomodoro::longBreakTimer() const{
 
     while (user_seconds >= 1) // visual indication of timer remaining
     {
-        std::cout << "\rLong break time remaining: " << int(display_minutes%60) << ':' << int(user_seconds%60)
-                                                     << std::flush;
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+        if (int(user_seconds%60 == 0)){ // formatting to display 00 instead of 0
+            std::cout << "\rLong break time remaining: " << int(display_minutes%60) << ':' << "00"
+                      << std::flush;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
+        else {
+            std::cout << "\rLong break time remaining: " << int(display_minutes % 60) << ':' << int(user_seconds % 60)
+                      << std::flush;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+        }
+
         user_seconds--;
         display_minutes = (user_seconds / 60);
     }
@@ -94,8 +117,17 @@ void Pomodoro::longBreakTarget(){
             int target{};
             std::cout << "What would you like to change this target to? (default is 4): ";
             std::cin >> target;
+
+            while(std::cin.fail()) { // Integer error handling
+                std::cout << "Error, please type a number!" << std::endl;
+                std::cin.clear();
+                std::cin.ignore(256,'\n');
+                std::cout << "What would you like to change this target to? (default is 4): ";
+                std::cin >> target;
+            }
+
             m_longBreakTarget = target;
-            std::cout << "You have changed your long break target to: " << m_longBreakTarget;
+            std::cout << "You have changed your long break target to: " << m_longBreakTarget << '\n';
             break;
         }
         else if (option == 2){
@@ -108,7 +140,7 @@ void Pomodoro::pomodoroOutputSettings() const {
     std::cout << "The current pomodoro timer setting is " << m_pomMinutes << " minutes.\n";
     std::cout << "The current short break timer setting is " << m_shortBreak << " minutes.\n";
     std::cout << "The current long break timer setting is " << m_longBreak << " minutes.\n";
-    std::cout << "The target number of pomodoros before a long break is " << m_longBreakTarget << "\n";
+    std::cout << "The target number of pomodoros before a long break is " << m_longBreakTarget << "\n\n";
 }
 
 void Pomodoro::pomodoroSettings(){ // adjust default settings
@@ -119,6 +151,16 @@ void Pomodoro::pomodoroSettings(){ // adjust default settings
     while(true){
         int option {};
         std::cin >> option;
+
+        while(std::cin.fail()) { // Integer error handling
+            std::cout << "Error, please type a number!" << std::endl;
+            std::cin.clear();
+            std::cin.ignore(256,'\n');
+            std::cout << "The pomodoro default timer is 25 minutes, would you like to change this?\n"
+                      << "[1] Yes\n[2] No\n";
+            std::cin >> option;
+        }
+
         if (option == 2){ // Selection of 'No'
             break;
         }
@@ -143,6 +185,16 @@ void Pomodoro::pomodoroSettings(){ // adjust default settings
     while(true){
         int option {};
         std::cin >> option;
+
+        while(std::cin.fail()) { // Integer error handling
+            std::cout << "Error, please type a number!" << std::endl;
+            std::cin.clear();
+            std::cin.ignore(256, '\n');
+            std::cout << "The short break timer is 5 minutes, would you like to change this?\n"
+                      << "[1] Yes\n[2] No\n";
+            std::cin >> option;
+        }
+
         if (option == 2){ // Selection of 'No'
             break;
         }
@@ -167,6 +219,16 @@ void Pomodoro::pomodoroSettings(){ // adjust default settings
     while(true){
         int option {};
         std::cin >> option;
+
+        while(std::cin.fail()) { // Integer error handling
+            std::cout << "Error, please type a number!" << std::endl;
+            std::cin.clear();
+            std::cin.ignore(256, '\n');
+            std::cout << "The long break timer is 5 minutes, would you like to change this?\n"
+                      << "[1] Yes\n[2] No\n";
+            std::cin >> option;
+        }
+
         if (option == 2){ // Selection of 'No'
             break;
         }
@@ -185,6 +247,3 @@ void Pomodoro::pomodoroSettings(){ // adjust default settings
         }
     }
 }
-
-
-
