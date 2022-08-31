@@ -44,11 +44,23 @@ void Diary::editGoal(){ // allows user to edit diary entries
             break;
         }
         int n_goal{};
-        std::cout << "Please type the index of goal you'd like to edit: ";
+        std::cout << "Please type the index of goal you'd like to edit (type 0 to exit): ";
         std::cin >> n_goal;
         n_goal = n_goal - 1; // subtract for index searching
 
-        if (n_goal >= m_diary.size()) { // error catching
+        while(std::cin.fail()) { // Integer error handling
+            std::cout << "Error, please type a number!" << std::endl;
+            std::cin.clear();
+            std::cin.ignore(256,'\n');
+            std::cout << "Please type the index of goal you'd like to edit: ";
+            std::cin >> n_goal;
+        }
+
+        if (n_goal == 0){ // type zero for exit
+            break;
+        }
+
+        else if (n_goal >= m_diary.size()) { // error catching
             std::cout << "Incorrect entry\n";
             n_goal = 0;
         }
@@ -71,6 +83,14 @@ void Diary::deleteGoal(){ // allows user to delete diary entries
     while (true) { // infinite loop to catch erroneous input
         int n_goal{};
         std::cin >> n_goal;
+
+        while(std::cin.fail()) { // Integer error handling
+            std::cout << "Error, please type a number!" << std::endl;
+            std::cin.clear();
+            std::cin.ignore(256,'\n');
+            std::cout << "Please type the index of goal you'd like to edit: ";
+            std::cin >> n_goal;
+        }
 
         if (n_goal <= m_diary.size()) {
             m_diary.erase(m_diary.begin() + n_goal - 1); // delete entry
