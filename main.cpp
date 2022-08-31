@@ -8,7 +8,7 @@ int main() {
         // Options menu
         int option{};
         do {
-            std::cout << "Welcome to the study bud!\n" << "Please select an option:\n"
+            std::cout << "Welcome to the Study Bud!\n" << "Please select an option:\n"
                       << "[1] Diary\n"
                       << "[2] Timer\n"
                       << "[3] Exit\n";
