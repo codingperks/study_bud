@@ -18,13 +18,15 @@ int main() {
             switch (option) {
                 case 1: { // Diary menu
                     int diary_option{};
-                    while(diary_option != 5) {
+                    while(diary_option !=7) {
                         std::cout << "Diary\n" << "Please select an option:\n"
                                   << "[1] View diary\n"
                                   << "[2] Enter goal\n"
                                   << "[3] Edit goal\n"
                                   << "[4] Delete goal\n"
-                                  << "[5] Exit\n";
+                                  << "[5] Save diary\n"
+                                  << "[6] Load diary\n"
+                                  << "[7] Exit\n";
 
                         diary_option = {};
                         std::cin >> diary_option;
@@ -34,17 +36,24 @@ int main() {
                         static Diary diary{}; // instantiate diary object
 
                         switch (diary_option) {
-                            case 1:
+                            case 1: // Print diary
                                 diary.displayDiary();
                                 break;
-                            case 2:
+                            case 2: // Allow user to enter goal
                                 diary.addGoal({Diary::enterGoal()});
                                 break;
-                            case 3:
+                            case 3: // Allow user to edit goal
                                 diary.editGoal();
                                 break;
-                            case 4:
+                            case 4: // Allow user to delete goal
                                 diary.deleteGoal();
+                                break;
+                            case 5: // Allow user to export diary to diary_output folder
+                                diary.saveDiary();
+                                break;
+                            case 6:
+                                break;
+                            case 7:
                                 break;
                             default:
                                 break;
@@ -75,7 +84,7 @@ int main() {
                         switch (timer_option) {
                             case 1: // Starting pomodoro timer
                                 pomodoro.pomodoroTimer();
-                                timerCounter = pomodoro.pomodoroCounter(timerCounter);
+                                timerCounter = Pomodoro::pomodoroCounter(timerCounter);
                                 std::cout << "You have completed " << timerCounter << " pomodoro(s)!\n";
 
                                 if (timerCounter == pomodoro.m_longBreakTarget){
@@ -120,7 +129,7 @@ int main() {
                                 break;
                             case 4: // Resetting pomodoro counter
                                 std::cout << "You have reset your counter of " << timerCounter << " to 0.\n";
-                                pomodoro.pomodoroCounterReset(timerCounter);
+                                Pomodoro::pomodoroCounterReset(timerCounter);
                                 break;
                             case 5: // Setting pomodoro target for long breaks
                                 pomodoro.longBreakTarget();

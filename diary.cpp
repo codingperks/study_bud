@@ -103,3 +103,29 @@ void Diary::deleteGoal(){ // allows user to delete diary entries
     }
 }
 
+void Diary::saveDiary(){
+    // Set fstream object
+    std::ofstream diary_export;
+
+    // Set export path - use current date and time for naming
+    time_t now = time(nullptr);
+    std::string dt = ctime(&now);     // convert now to string form
+
+    // Set export name to diary_current date and time
+    const std::string& export_name {dt};
+
+    // Export diary entries
+    diary_export.open("diary_output/" + export_name + ".csv");
+    diary_export << "Index,Goal\n"; // csv headers
+    for (const auto& entry : m_diary){
+        static int diary_index {1};
+        diary_export << std::to_string(diary_index) << ',' << entry << '\n';
+        diary_index++;
+    }
+    diary_export.close();
+}
+
+void Diary::loadDiary(){
+
+}
+
