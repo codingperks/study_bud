@@ -1,16 +1,9 @@
 //
 // Created by Ryan Perkins on 23/08/2022.
-// Last updated 30/08/2022.
 //
 
 #include "requirements.h"
 #include "diary.h"
-
-/*void Diary::mapDiary(){
-    std::map<std::string, int> diary_map;
-    diary_map[m_diary[0]] = m_diary_status[0];
-}*/
-
 
 void Diary::displayDiary(){  // prints the current diary goals
     std::cout << "\nCurrent diary\n"; // for tidiness of visuals
