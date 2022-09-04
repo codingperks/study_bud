@@ -7,8 +7,7 @@
 #include "requirements.h"
 
 void Pomodoro::pomodoroTimer() const{ // count down a pomodoro timer - pause and play functionality
-    int user_seconds {};
-    user_seconds = (m_pomMinutes * 60); // convert minutes to seconds
+    int user_seconds = (m_pomMinutes * 60); // convert minutes to seconds
 
     // Convert seconds to MM:SS timer
     int display_minutes {};
@@ -34,8 +33,7 @@ void Pomodoro::pomodoroTimer() const{ // count down a pomodoro timer - pause and
 }
 
 void Pomodoro::shortBreakTimer() const{
-    int user_seconds {};
-    user_seconds = (m_shortBreak * 60); // convert minutes to seconds
+    int user_seconds = (m_shortBreak * 60); // convert minutes to seconds
 
     // Convert seconds to MM:SS timer
     int display_minutes {};
@@ -62,8 +60,7 @@ void Pomodoro::shortBreakTimer() const{
 }
 
 void Pomodoro::longBreakTimer() const{
-    int user_seconds {};
-    user_seconds = (m_longBreak * 60); // convert minutes to seconds
+    int user_seconds = (m_longBreak * 60); // convert minutes to seconds
 
     // Convert seconds to MM:SS timer
     int display_minutes {};
