@@ -10,7 +10,7 @@ int main() {
             std::cout << "Welcome to the Study Bud!\n" << "Please select an option:\n"
                       << "[1] Diary\n"
                       << "[2] Timer\n"
-                      << "[3] Exit\n";
+                      << "[0] Exit\n";
             std::cin >> option;
             std::cin.clear(); // to remove erroneous enter presses from cin
             std::cin.get();
@@ -18,15 +18,15 @@ int main() {
             switch (option) {
                 case 1: { // Diary menu
                     int diary_option{};
-                    while(diary_option !=7) {
+                    do {
                         std::cout << "Diary\n" << "Please select an option:\n"
                                   << "[1] View diary\n"
                                   << "[2] Enter goal\n"
                                   << "[3] Edit goal\n"
                                   << "[4] Delete goal\n"
                                   << "[5] Save diary\n"
-                                  << "[6] Load diary\n"
-                                  << "[7] Exit\n";
+                                  << "[6] Load diary - to implement\n"
+                                  << "[0] Exit\n";
 
                         diary_option = {};
                         std::cin >> diary_option;
@@ -41,6 +41,7 @@ int main() {
                                 break;
                             case 2: // Allow user to enter goal
                                 diary.addGoal({Diary::enterGoal()});
+                                diary.addGoalStatus({Diary::enterGoalStatus()});
                                 break;
                             case 3: // Allow user to edit goal
                                 diary.editGoal();
@@ -53,12 +54,12 @@ int main() {
                                 break;
                             case 6:
                                 break;
-                            case 7:
+                            case 0:
                                 break;
                             default:
                                 break;
                         }
-                    }
+                    } while (diary_option != 0);
                     std::cin.clear();
                     break;
                 }
@@ -72,7 +73,7 @@ int main() {
                                   << "[3] Adjust timer lengths\n"
                                   << "[4] Reset pomodoro counter\n"
                                   << "[5] Adjust long break target intervals\n"
-                                  << "[6] Exit\n";
+                                  << "[0] Exit\n";
 
                         std::cin >> timer_option;
                         std::cin.clear(); // to remove erroneous enter presses from cin
@@ -87,12 +88,12 @@ int main() {
                                 timerCounter = Pomodoro::pomodoroCounter(timerCounter);
                                 std::cout << "You have completed " << timerCounter << " pomodoro(s)!\n";
 
-                                if (timerCounter == pomodoro.m_longBreakTarget){
+                                if (timerCounter == pomodoro.m_longBreakTarget) {
                                     timerCounter = 0; // reset counters
                                     std::cout << "It's time for a long break.\n";
                                     std::cout << "Would you like to start the long break timer or exit?\n";
 
-                                    int longBreakOption {};
+                                    int longBreakOption{};
                                     do {
                                         std::cout << "[1] Start timer\n[2] Exit\n";
                                         std::cin >> longBreakOption;
@@ -102,13 +103,11 @@ int main() {
                                             break;
                                         }
                                     } while (longBreakOption != 2);
-                                }
-
-                                else {
+                                } else {
                                     std::cout << "It's time for a short break.\n";
                                     std::cout << "Would you like to start the short break timer or exit?\n";
 
-                                    int shortBreakOption {};
+                                    int shortBreakOption{};
                                     do {
                                         std::cout << "[1] Start timer\n[2] Exit\n";
                                         std::cin >> shortBreakOption;
@@ -134,14 +133,13 @@ int main() {
                             case 5: // Setting pomodoro target for long breaks
                                 pomodoro.longBreakTarget();
                                 break;
-                            case 6:
                             default:
                                 break;
                         }
-                    } while (option != 6);
+                    } while (timer_option != 0);
                 }
             }
-        } while (option != 3);
+        } while (option != 0);
         break;
     }
     return 0;

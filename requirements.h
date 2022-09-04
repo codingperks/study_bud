@@ -12,5 +12,9 @@
 #include <thread>
 #include <utility>
 #include <string>
+#include <fstream> // for csv writing
+#include <ctime> // to call today's date for naming purposes
+#include <map> // to zip together diary dictionary
+#include <vector>
 
 #endif //STUDY_BUD_REQUIREMENTS_H
