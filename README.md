@@ -1,3 +1,4 @@
+
 #Study Bud
 
 This project contains a suite of tools to aid with studying. These tools include a diary, a bundle of [pomodoro timers](https://en.wikipedia.org/wiki/Pomodoro_Technique) and a separate timer reminding the user to drink water (the latter of which I especially forget to do in the middle of a deep study session).
@@ -13,6 +14,7 @@ This repo includes the following modules:
                                 the water reminder timer
 
 These tools have been programmed in C++ and compiled using cmake. Each of these .cpp source files contain corresponding header files. Requirements are specified within a **requirements.h** header file.
+
 ##Installation instructions
 
 To install and run:
@@ -22,6 +24,7 @@ To install and run:
 - Run main.cpp
 
 ###Requirements
+
 The required headers and namespaces have been detailed in requirements.h, for posterity, these are:
 ```
 #include <iostream> // for std::
