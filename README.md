@@ -1,5 +1,5 @@
 
-#Study Bud
+# Study Bud
 
 This project contains a suite of tools to aid with studying. These tools include a diary, a bundle of [pomodoro timers](https://en.wikipedia.org/wiki/Pomodoro_Technique) and a separate timer reminding the user to drink water (the latter of which I especially forget to do in the middle of a deep study session).
 
@@ -15,7 +15,7 @@ This repo includes the following modules:
 
 These tools have been programmed in C++ and compiled using cmake. Each of these .cpp source files contain corresponding header files. Requirements are specified within a **requirements.h** header file.
 
-##Installation instructions
+## Installation instructions
 
 To install and run:
 
@@ -23,7 +23,7 @@ To install and run:
 - Compile using your c++ compiler
 - Run main.cpp
 
-###Requirements
+### Requirements
 
 The required headers and namespaces have been detailed in requirements.h, for posterity, these are:
 ```
@@ -39,7 +39,7 @@ The required headers and namespaces have been detailed in requirements.h, for po
 ```
 The requirements.h header is called within the main.cpp file - no need for additional user input for installation of requirements.
 
-##Usage instructions
+## Usage instructions
 main.cpp opens the following menu:
 
 ```
@@ -52,8 +52,8 @@ Please select an option:
 
 Menu options can be selected by typing a number and pressing the enter key. This is how each subsequent menu option is also selected by the user. On most menus, an input of '0' will exit the user back to the menu a level higher. Exiting at the menu above terminates the program. 
 
-##Further usage instructions
-###Diary
+## Further usage instructions
+### Diary
 A menu option selection of 1 will launch the following diary menu:
 ```
 Diary
@@ -182,15 +182,15 @@ A long break occurs after 4 pomodoros, with the program retaining the number of 
 ```[5] Adjust long break target intervals```
 A long break occurs after 4 pomodoros, if the user would like a long break more (or less) frequently, they can adjust this target here.
 
-###Water
+### Water
 This module allows the user to input an interval of time in which to be reminded to take a drink of water. However, this is currently not integrated into the main suite due to the need for a concurrency implementation. This module works standalone, but is yet to be implemented together with the pomodoro timer.
 
-#Author details
+# Author details
 Name: Ryan Perkins
 
 gitHub: codingperks
 
-###Author footnotes
+### Author footnotes
 I created these tools to aid with my upcoming M.Sc. in Computing, as well to practice C++. I use the pomodoro technique quite frequently in my study so this seemed to be an appropriate project to start with.
 
 
