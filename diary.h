@@ -5,12 +5,10 @@
 #ifndef STUDY_BUD_DIARY_H
 #define STUDY_BUD_DIARY_H
 
-
-
 class Diary{
 private:
     std::vector<std::string> m_diary; // to hold goals
-    std::vector<std::string> m_diary_status ; // to mark completion status
+    std::vector<std::string> m_diary_status ; // to record completion status
 
 public:
     void displayDiary();
@@ -23,7 +21,6 @@ public:
     void deleteGoal();
     void saveDiary(); // output csv with date, overwrite option
     void loadDiary();
-    // read csv function
 };
 
 #endif //STUDY_BUD_DIARY_H

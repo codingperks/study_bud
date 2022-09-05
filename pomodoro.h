@@ -7,23 +7,20 @@
 
 class Pomodoro{
 private:
-    int m_pomMinutes = 25;
-    int m_shortBreak = 5;
-    int m_longBreak = 20;
+    int m_pomMinutes = 25; // default pomodoro timer of 25 minutes
+    int m_shortBreak = 5; // default short break timer of 5 minutes
+    int m_longBreak = 20; // default long break timer of 20 minutes
 
 public:
-    int m_longBreakTarget = 4;
-    void pomodoroTimer();
-    void shortBreakTimer();
-    void longBreakTimer();
-    int pomodoroCounter(int timerCounter);
+    int m_longBreakTarget = 4; // default long break interval of 4 pomodoros
+    void pomodoroTimer() const;
+    void shortBreakTimer() const;
+    void longBreakTimer() const;
+    static int pomodoroCounter(int timerCounter);
     void pomodoroSettings();
-    void pomodoroOutputSettings();
-    void pomodoroCounterReset(int timerCounter);
+    void pomodoroOutputSettings() const;
+    static void pomodoroCounterReset(int timerCounter);
     void longBreakTarget();
-
     };
-
-
 
 #endif //STUDY_BUD_POMODORO_H
