@@ -29,6 +29,7 @@ The required headers and namespaces have been detailed in requirements.h, for po
 ```
 #include <iostream> // for std::
 #include <utility>
+#include <thread> // for timing functionality
 #include <ctime> // for timer functionality
 #include <cstdio> // for I/O operations
 #include <chrono> // for timer functionalities
@@ -36,6 +37,10 @@ The required headers and namespaces have been detailed in requirements.h, for po
 #include <fstream> // for csv writing
 #include <ctime> // to call today's date for naming purposes
 #include <vector> // to generate diary member objects
+#include <regex> // for diary import
+#include <filesystem> // for diary import
+#include <format> // for diary import
+#include <sstream> // for diary import
 ```
 The requirements.h header is called within the main.cpp file - no need for additional user input for installation of requirements.
 
@@ -131,9 +136,8 @@ This option exports the current diary to a csv file into the 'diary_output' fold
 | 2     | Program the diary.cpp modules          | Complete    |
 | 3     | Learn how to move objects with my mind | Planned     |
 
-``` [6] Load diary``` **currently unimplemented**
-This functionality is currently unimplemented, but this function will allow users to load a new diary object from one of these csv files.
-
+``` [6] Load diary``` 
+This option allows the user to import a csv file from the diary folder to serve as the current diary. This overwrites the existing diary, user is prompted of this before continuing.
 ### Timer
 
 A menu option of 2 will open the timer menu. This timer is based on the [pomodoro technique for studying](https://en.wikipedia.org/wiki/Pomodoro_Technique). This technique involves working for an interval of time or 'pomodoros' (usually 25 minutes) followed by a short break (usually 5 minutes). After the fourth pomodoro is completed, a long break of 20 - 30 minutes is then taken.

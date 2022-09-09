@@ -25,7 +25,7 @@ int main() {
                                   << "[3] Edit goal\n"
                                   << "[4] Delete goal\n"
                                   << "[5] Save diary\n"
-                                  << "[6] Load diary - to implement\n"
+                                  << "[6] Load diary\n"
                                   << "[0] Exit\n";
 
                         diary_option = {};
@@ -53,6 +53,7 @@ int main() {
                                 diary.saveDiary();
                                 break;
                             case 6:
+                                diary.loadDiary();
                                 break;
                             case 0:
                                 break;

@@ -170,6 +170,7 @@ void Diary::saveDiary(){
     // Set export path - use current date and time for naming
     time_t now = time(nullptr);
     std::string dt = ctime(&now);     // convert now to string form
+    dt = std::regex_replace(dt, std::regex(":"), "."); // replace colons with periods for name formatting
 
     // Set export name using current date and time
     const std::string& export_name {dt};
@@ -186,7 +187,101 @@ void Diary::saveDiary(){
     diary_export.close();
 }
 
-void Diary::loadDiary(){
+void Diary::loadDiary() {
+    // Set import path
+    std::string path = "diary_output/";
 
+    std::vector<std::filesystem::directory_entry> diary_files; // to create a vector of filenames
+
+    int index{1};
+    for (const auto &entry: std::filesystem::directory_iterator(path)) {
+        std::cout << index << " " << entry.path() << std::endl;
+        index++;
+        diary_files.push_back(entry); // add filename to vector
+    }
+
+    while (true) {
+        std::cout << "Select the index of a diary you would like to load:" << std::endl;
+        int import_index{};
+        std::cin >> import_index;
+
+        while (std::cin.fail()) { // Integer error handling
+            std::cout << "Error, please type a number!" << std::endl;
+            std::cin.clear();
+            std::cin.ignore(256, '\n');
+            std::cout << "Select the index of a diary you would like to load:" << std::endl;
+            std::cin >> import_index;
+        }
+
+        if (import_index <= diary_files.size() && import_index > 0) {
+            //if selected index is less than/equal to the number of files
+
+            // Delete diary confirmation
+            std::cout << "Loading a diary will overwrite your previous diary, are you happy to proceed?\n";
+            std::cout << "[1] Yes\n[2] No\n";
+
+            int delete_confirmation{};
+            std::cin >> delete_confirmation;
+
+            while (std::cin.fail()) { // Integer error handling
+                std::cout << "Error, please type a number!" << std::endl;
+                std::cin.clear();
+                std::cin.ignore(256, '\n');
+                std::cout << "Loading a diary will overwrite your previous diary, are you happy to proceed?\n";
+                std::cout << "[1] Yes\n[2] No";
+                std::cin >> delete_confirmation;
+            }
+
+            if (delete_confirmation == 1){ // Respondent confirming (Yes)
+                // Reset diary
+                m_diary.clear();
+                m_diary_status.clear();
+
+                std::string selected_diary{diary_files[import_index - 1].path()};
+                std::ifstream diary_import(selected_diary);
+
+                std::string line{};
+                std::vector<std::string> diary_csv{}; // vector to hold csv lines
+
+                while (std::getline(diary_import, line, '\n')) {
+                    diary_csv.push_back(line); // add csv lines to a vector
+                }
+
+                diary_csv.erase(diary_csv.begin()); // drop header row
+
+                for (auto row: diary_csv) {
+                    std::string goal = row.substr(1, row.find(',')); // position 1 is always goal
+                    std::string status = row.substr(2, row.find(',')); // position 2 is always status
+
+                    size_t first_comma_pos = row.find(','); // denote position of first comma
+                    row.erase(0, first_comma_pos + 1); // delete everything prior to location, including comma
+
+                    // Add goal to diary
+                    std::string goal_csv{};
+
+                    size_t second_comma_pos = row.find(','); // denote position of first comma
+                    goal_csv = row.substr(0, second_comma_pos);
+                    m_diary.push_back(goal_csv);
+
+                    // Add status to diary
+                    std::string status_csv{};
+                    status_csv = row.substr(second_comma_pos + 1, row.length());
+                    m_diary_status.push_back(status_csv);
+                }
+                break;
+            }
+            else if (delete_confirmation == 2) {
+                break;
+                }
+            else {
+                std::cout << "Error, please select a number above!" << std::endl;
+                std::cin.clear();
+                std::cin.ignore(256, '\n');
+                }
+            }
+        else {
+            std::cout << "Invalid selection!\n";
+            }
+        }
+    std::cout << "Diary loaded!\n";
 }
-
