@@ -163,28 +163,70 @@ void Diary::deleteGoal(){ // allows user to delete diary entries
     }
 }
 
-void Diary::saveDiary(){
+void Diary::saveDiary() {
     // Set file stream object
     std::ofstream diary_export;
 
-    // Set export path - use current date and time for naming
-    time_t now = time(nullptr);
-    std::string dt = ctime(&now);     // convert now to string form
-    dt = std::regex_replace(dt, std::regex(":"), "."); // replace colons with periods for name formatting
+    // Rename confirmation
+    while (true) {
+        std::cout << "Would you like to name this diary? (Default name uses {Day, Month, Day, HH.MM.SS, 2022} format)\n";
+        std::cout << "[1] Yes\n[2] No";
 
-    // Set export name using current date and time
-    const std::string& export_name {dt};
-    diary_export.open("diary_output/" + export_name + ".csv");
+        int rename_confirmation{};
+        std::cin >> rename_confirmation;
 
-    // Export diary entries
-    diary_export << "Index,Goal,Status\n"; // csv headers
-
-    for (int i {0}; i < m_diary.size(); i++){
-            static int diary_index{1};
-            diary_export << std::to_string(diary_index) << ',' << m_diary[i] << ',' << m_diary_status[i] << '\n';
-            diary_index++;
+        while (std::cin.fail()) { // Integer error handling
+            std::cout << "Error, please type a number!" << std::endl;
+            std::cin.clear();
+            std::cin.ignore(256, '\n');
+            std::cout << "Would you like to name this diary? Default name uses {Day, Month, Day, HH.MM.SS, 2022} format";
+            std::cout << "[1] Yes\n[2] No\n";
+            std::cin >> rename_confirmation;
         }
-    diary_export.close();
+
+        if (rename_confirmation == 1){
+            // Set export path - string entry
+            std::cout << "What would you like to name this? (max characters = 20)\n";
+            std::string entry{};
+            std::getline(std::cin >> std::ws, entry);
+
+            // Set export name using current date and time
+            diary_export.open("diary_output/" + entry + ".csv");
+
+            // Export diary entries
+            diary_export << "Index,Goal,Status\n"; // csv headers
+
+            for (int i{0}; i < m_diary.size(); i++) {
+                static int diary_index{1};
+                diary_export << std::to_string(diary_index) << ',' << m_diary[i] << ',' << m_diary_status[i] << '\n';
+                diary_index++;
+            }
+            diary_export.close();
+            break;
+        }
+
+        else {
+            // Set export path - use current date and time for naming
+            time_t now = time(nullptr);
+            std::string dt = ctime(&now);     // convert now to string form
+            dt = std::regex_replace(dt, std::regex(":"), "."); // replace colons with periods for name formatting
+
+            // Set export name using current date and time
+            const std::string &export_name{dt};
+            diary_export.open("diary_output/" + export_name + ".csv");
+
+            // Export diary entries
+            diary_export << "Index,Goal,Status\n"; // csv headers
+
+            for (int i{0}; i < m_diary.size(); i++) {
+                static int diary_index{1};
+                diary_export << std::to_string(diary_index) << ',' << m_diary[i] << ',' << m_diary_status[i] << '\n';
+                diary_index++;
+            }
+            diary_export.close();
+            break;
+        }
+    }
 }
 
 void Diary::loadDiary() {
