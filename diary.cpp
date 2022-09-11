@@ -4,6 +4,7 @@
 
 #include "requirements.h"
 #include "diary.h"
+#include "utilities.h"
 
 void Diary::displayDiary(){  // prints the current diary goals
     std::cout << "\nCurrent diary\n"; // for tidiness of visuals
@@ -39,23 +40,14 @@ int Diary::enterGoalStatus() {
 
     int goal_status{};
     while (true) {
-        std::cout << "[1] Planned\n[2] In-progress\n[3] Completed\n";
-        std::cout << "Please type the index of goal status here (type 0 to exit): ";
+        std::string status {"[1] Planned\n[2] In-progress\n[3] Completed\n"
+                            "Please type the index of goal status here: "};
+        std::cout << status;
         std::cin >> goal_status;
-        goal_status = goal_status - 1; // subtract for index searching
+        int max_range = 3;
 
-        while (std::cin.fail() || goal_status >= 3) { // Integer error handling
-            std::cout << "Error, please select from the numbers above!" << std::endl;
-            std::cin.clear();
-            std::cin.ignore(256, '\n');
-            std::cout << "Please type the index of goal status here (type 0 to exit):";
-            std::cin >> goal_status;
-            goal_status = goal_status - 1;
-        }
-
-        if (goal_status == -1) {
-            break;
-        }
+        goal_status = integerHandling(goal_status, max_range,
+                        status,-1);
 
         std::cout <<'\n';
 
@@ -86,23 +78,18 @@ void Diary::editGoal(){ // allows user to edit diary entries
             break;
         }
         int n_goal{};
-        std::cout << "Please type the index of goal you'd like to edit (type 0 to exit): ";
+        std::string status {"Please type the index of goal you'd like to edit: "};
+        std::cout << status;
         std::cin >> n_goal;
 
-        while(std::cin.fail()) { // Integer error handling
-            std::cout << "Error, please type a number!" << std::endl;
-            std::cin.clear();
-            std::cin.ignore(256,'\n');
-            std::cout << "Please type the index of goal you'd like to edit (type 0 to exit): ";
-            std::cin >> n_goal;
-        }
-        n_goal = n_goal - 1; // subtract for index searching
+        n_goal = integerHandling(n_goal, m_diary.size(),
+                        status, -1);
 
         if (n_goal == -1){ // type zero for exit
             break;
         }
 
-        else if (n_goal >= m_diary.size()) { // error catching
+        else if (n_goal > m_diary.size()) { // error catching
             std::cout << "Incorrect entry\n";
         }
 
@@ -113,8 +100,7 @@ void Diary::editGoal(){ // allows user to edit diary entries
             std::getline(std::cin >> std::ws, edited_goal);
             m_diary[n_goal] = edited_goal;
             while (true) {
-                int edited_goal_status {};
-                edited_goal_status = enterGoalStatus();
+                int edited_goal_status = enterGoalStatus();
                 switch (edited_goal_status) {
                     case (0):
                         m_diary_status[n_goal] = ("Planned");
@@ -137,19 +123,15 @@ void Diary::editGoal(){ // allows user to edit diary entries
 
 void Diary::deleteGoal(){ // allows user to delete diary entries
     Diary::displayDiary();
-    std::cout << "Please type the index of goal you'd like to delete: ";
+    std::string status {"Please type the index of goal you'd like to delete: "};
+    std::cout << status;
 
     while (true) { // infinite loop to catch erroneous input
         int n_goal{};
         std::cin >> n_goal;
 
-        while(std::cin.fail()) { // Integer error handling
-            std::cout << "Error, please type a number!" << std::endl;
-            std::cin.clear();
-            std::cin.ignore(256,'\n');
-            std::cout << "Please type the index of goal you'd like to delete: ";
-            std::cin >> n_goal;
-        }
+        n_goal = integerHandling(n_goal, m_diary.size(),
+                                 status, 0);
 
         if (n_goal <= m_diary.size()) {
             m_diary.erase(m_diary.begin() + n_goal - 1); // delete entry
@@ -157,9 +139,7 @@ void Diary::deleteGoal(){ // allows user to delete diary entries
             std::cout << "Entry deleted!\n";
             break;
         }
-        else {
-            std::cout << "Invalid selection!\nPlease type the index of the goal you'd like to delete: ";
-        }
+
     }
 }
 
@@ -169,24 +149,19 @@ void Diary::saveDiary() {
 
     // Rename confirmation
     while (true) {
-        std::cout << "Would you like to name this diary? (Default name uses {Day, Month, Day, HH.MM.SS, 2022} format)\n";
-        std::cout << "[1] Yes\n[2] No";
+        std::string status {"Would you like to name this diary? (Default name uses {Day, Month, Day, HH.MM.SS, 2022}"
+                            " format)\n[1] Yes\n[2] No"};
+        std::cout << status;
 
         int rename_confirmation{};
         std::cin >> rename_confirmation;
 
-        while (std::cin.fail()) { // Integer error handling
-            std::cout << "Error, please type a number!" << std::endl;
-            std::cin.clear();
-            std::cin.ignore(256, '\n');
-            std::cout << "Would you like to name this diary? Default name uses {Day, Month, Day, HH.MM.SS, 2022} format";
-            std::cout << "[1] Yes\n[2] No\n";
-            std::cin >> rename_confirmation;
-        }
+        rename_confirmation = integerHandling(rename_confirmation, m_diary.size(),
+                                        status , 0);
 
         if (rename_confirmation == 1){
             // Set export path - string entry
-            std::cout << "What would you like to name this? (max characters = 20)\n";
+            std::cout << "What would you like to name this diary? (max characters = 31)\n";
             std::string entry{};
             std::getline(std::cin >> std::ws, entry);
 
@@ -209,7 +184,7 @@ void Diary::saveDiary() {
             // Set export path - use current date and time for naming
             time_t now = time(nullptr);
             std::string dt = ctime(&now);     // convert now to string form
-            dt = std::regex_replace(dt, std::regex(":"), "."); // replace colons with periods for name formatting
+            dt = std::regex_replace(dt, std::regex(":"), "."); // replace colons with periods for filename
 
             // Set export name using current date and time
             const std::string &export_name{dt};
@@ -243,36 +218,28 @@ void Diary::loadDiary() {
     }
 
     while (true) {
-        std::cout << "Select the index of a diary you would like to load:" << std::endl;
+        std::string status {"Select the index of a diary you would like to load: "};
+        std::cout << status;
         int import_index{};
         std::cin >> import_index;
 
-        while (std::cin.fail()) { // Integer error handling
-            std::cout << "Error, please type a number!" << std::endl;
-            std::cin.clear();
-            std::cin.ignore(256, '\n');
-            std::cout << "Select the index of a diary you would like to load:" << std::endl;
-            std::cin >> import_index;
-        }
+        import_index = integerHandling(import_index, index,
+                                       status , 0);
 
         if (import_index <= diary_files.size() && import_index > 0) {
             //if selected index is less than/equal to the number of files
 
             // Delete diary confirmation
-            std::cout << "Loading a diary will overwrite your previous diary, are you happy to proceed?\n";
-            std::cout << "[1] Yes\n[2] No\n";
+            std::string status_2 {"Loading a diary will overwrite your previous diary, are you happy to proceed?\n"
+                                "1] Yes\n[2] No\n"};
+            std::cout << status_2;
 
             int delete_confirmation{};
             std::cin >> delete_confirmation;
+            int max_range = 2;
 
-            while (std::cin.fail()) { // Integer error handling
-                std::cout << "Error, please type a number!" << std::endl;
-                std::cin.clear();
-                std::cin.ignore(256, '\n');
-                std::cout << "Loading a diary will overwrite your previous diary, are you happy to proceed?\n";
-                std::cout << "[1] Yes\n[2] No";
-                std::cin >> delete_confirmation;
-            }
+            delete_confirmation = integerHandling(delete_confirmation, max_range,
+                                           status_2 , 0);
 
             if (delete_confirmation == 1){ // Respondent confirming (Yes)
                 // Reset diary
@@ -309,7 +276,9 @@ void Diary::loadDiary() {
                     std::string status_csv{};
                     status_csv = row.substr(second_comma_pos + 1, row.length());
                     m_diary_status.push_back(status_csv);
+
                 }
+                std::cout << "Diary loaded!\n";
                 break;
             }
             else if (delete_confirmation == 2) {
@@ -325,5 +294,4 @@ void Diary::loadDiary() {
             std::cout << "Invalid selection!\n";
             }
         }
-    std::cout << "Diary loaded!\n";
 }
