@@ -96,6 +96,12 @@ build CMakeFiles/study_bud.dir/pomodoro.cpp.o: CXX_COMPILER__study_bud_Debug /Us
   OBJECT_DIR = CMakeFiles/study_bud.dir
   OBJECT_FILE_DIR = CMakeFiles/study_bud.dir
 
+build CMakeFiles/study_bud.dir/utilities.cpp.o: CXX_COMPILER__study_bud_Debug /Users/ryanperkins/CLionProjects/study_bud/utilities.cpp || cmake_object_order_depends_target_study_bud
+  DEP_FILE = CMakeFiles/study_bud.dir/utilities.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.2 -std=gnu++2a
+  OBJECT_DIR = CMakeFiles/study_bud.dir
+  OBJECT_FILE_DIR = CMakeFiles/study_bud.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target study_bud
@@ -104,7 +110,7 @@ build CMakeFiles/study_bud.dir/pomodoro.cpp.o: CXX_COMPILER__study_bud_Debug /Us
 #############################################
 # Link the executable study_bud
 
-build study_bud: CXX_EXECUTABLE_LINKER__study_bud_Debug CMakeFiles/study_bud.dir/main.cpp.o CMakeFiles/study_bud.dir/water.cpp.o CMakeFiles/study_bud.dir/diary.cpp.o CMakeFiles/study_bud.dir/pomodoro.cpp.o
+build study_bud: CXX_EXECUTABLE_LINKER__study_bud_Debug CMakeFiles/study_bud.dir/main.cpp.o CMakeFiles/study_bud.dir/water.cpp.o CMakeFiles/study_bud.dir/diary.cpp.o CMakeFiles/study_bud.dir/pomodoro.cpp.o CMakeFiles/study_bud.dir/utilities.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -mmacosx-version-min=12.2
   OBJECT_DIR = CMakeFiles/study_bud.dir
   POST_BUILD = :
