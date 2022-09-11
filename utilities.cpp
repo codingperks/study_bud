@@ -16,3 +16,52 @@ int integerHandling(int input, int target = 0, const std::string& status = "", s
     return input + increment;
 }
 
+bool forbiddenChar(const std::string& entry){ // return true if no forbidden characters found in string, return false otherwise
+    if (entry.find('<') != std::string::npos) {
+        std::cout << "Error: filename contains forbidden character '<'\n";
+        return true;
+    }
+    if (entry.find('>') != std::string::npos) {
+        std::cout << "Error: filename contains forbidden character '>'\n";
+        return true;
+    }
+    if (entry.find(':') != std::string::npos) {
+        std::cout << "Error: filename contains forbidden character ':'\n";
+        return true;
+    }
+    if (entry.find('\"') != std::string::npos) {
+        std::cout << "Error: filename contains forbidden character '\"'\n";
+        return true;
+    }
+    if (entry.find('/') != std::string::npos) {
+        std::cout << "Error: filename contains forbidden character '/'\n";
+        return true;
+    }
+    if (entry.find('\\') != std::string::npos) {
+        std::cout << "Error: filename contains forbidden character '\\'\n";
+        return true;
+    }
+    if (entry.find('|') != std::string::npos) {
+        std::cout << "Error: filename contains forbidden character '|'\n";
+        return true;
+    }
+    if (entry.find('?') != std::string::npos) {
+        std::cout << "Error: filename contains forbidden character '?'\n";
+        return true;
+    }
+    if (entry.find('*') != std::string::npos) {
+        std::cout << "Error: filename contains forbidden character '*'\n";
+        return true;
+    }
+        return false;
+}
+
+bool checkStringLength(const std::string& entry, int target){
+    if (entry.length() <= target){
+        return false;
+    }
+    else{
+        std::cout << "Filename exceeds 31 characters, please shorten.\n";
+        return true;
+    }
+}

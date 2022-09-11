@@ -119,8 +119,6 @@ void Diary::editGoal(){ // allows user to edit diary entries
         }
     }
 
-
-
 void Diary::deleteGoal(){ // allows user to delete diary entries
     Diary::displayDiary();
     std::string status {"Please type the index of goal you'd like to delete: "};
@@ -150,7 +148,7 @@ void Diary::saveDiary() {
     // Rename confirmation
     while (true) {
         std::string status {"Would you like to name this diary? (Default name uses {Day, Month, Day, HH.MM.SS, 2022}"
-                            " format)\n[1] Yes\n[2] No"};
+                            " format)\n[1] Yes\n[2] No\n"};
         std::cout << status;
 
         int rename_confirmation{};
@@ -160,10 +158,15 @@ void Diary::saveDiary() {
                                         status , 0);
 
         if (rename_confirmation == 1){
-            // Set export path - string entry
-            std::cout << "What would you like to name this diary? (max characters = 31)\n";
             std::string entry{};
-            std::getline(std::cin >> std::ws, entry);
+            int max_characters {31};
+            do {
+                // Set export path - string entry
+                std::cout << "What would you like to name this diary? (max characters = 31)\n";
+                std::getline(std::cin >> std::ws, entry);
+
+            } while (forbiddenChar(entry) || checkStringLength(entry, max_characters));
+            // check for forbidden characters & string length
 
             // Set export name using current date and time
             diary_export.open("diary_output/" + entry + ".csv");
@@ -173,11 +176,13 @@ void Diary::saveDiary() {
 
             for (int i{0}; i < m_diary.size(); i++) {
                 static int diary_index{1};
-                diary_export << std::to_string(diary_index) << ',' << m_diary[i] << ',' << m_diary_status[i] << '\n';
+                diary_export << std::to_string(diary_index) << ',' << m_diary[i] << ',' << m_diary_status[i]
+                             << '\n';
                 diary_index++;
             }
-            diary_export.close();
-            break;
+
+        diary_export.close();
+        break;
         }
 
         else {

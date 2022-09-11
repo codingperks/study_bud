@@ -1,6 +1,7 @@
 #include "requirements.h"
 #include "diary.h"
 #include "pomodoro.h"
+#include "utilities.h"
 
 int main() {
     while (true) {
