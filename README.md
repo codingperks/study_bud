@@ -13,6 +13,8 @@ This repo includes the following modules:
 **water.cpp** (unimplemented) - which contains functions related to
                                 the water reminder timer
 
+**utilities.cpp** - helper functions to aid with cleaning up repetition within codebase
+
 These tools have been programmed in C++ and compiled using cmake. Each of these .cpp source files contain corresponding header files. Requirements are specified within a **requirements.h** header file.
 
 ## Installation instructions
