@@ -70,7 +70,7 @@ Please select an option:
 [3] Edit goal
 [4] Delete goal
 [5] Save diary
-[6] Load diary - to implement
+[6] Load diary
 [0] Exit
 ```
 ```[1] View diary```
@@ -176,7 +176,7 @@ After four pomodoros, the user is prompted if they would like to start the long 
 ```The current pomodoro timer setting is 25 minutes.
 The current short break timer setting is 5 minutes.
 The current long break timer setting is 20 minutes.
-The target number of pomodoros before a long break is 4
+The target number of pomodoros before a long break is 4.
 ```
 
 ```[3] Adjust timer lengths```
