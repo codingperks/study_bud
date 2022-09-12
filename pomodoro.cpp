@@ -29,7 +29,7 @@ void Pomodoro::pomodoroTimer() const{ // count down a pomodoro timer - pause and
         user_seconds--;
         display_minutes = (user_seconds / 60);
     }
-
+    std::cout << "\a"; // play beep
     std::cout << "\nPomodoro timer complete (don't forget to drink water)!\n";
 }
 
@@ -56,7 +56,7 @@ void Pomodoro::shortBreakTimer() const{
         user_seconds--;
         display_minutes = (user_seconds / 60);
     }
-
+    std::cout << "\a"; // play beep
     std::cout << "\nShort break complete!\n";
 }
 
@@ -82,7 +82,7 @@ void Pomodoro::longBreakTimer() const{
         user_seconds--;
         display_minutes = (user_seconds / 60);
     }
-
+    std::cout << "\a"; // play beep
     std::cout << "\nLong break complete!\n";
 }
 
